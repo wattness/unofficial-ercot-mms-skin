@@ -1,0 +1,93 @@
+/* A select with a search box, drawn with the same field look as <select>. */
+[data-skin="mms"] .combobox {
+  position: relative;
+  display: inline-block;
+}
+
+[data-skin="mms"] .combobox-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  height: 20px;
+  padding: 0 3px 0 4px;
+  border: 1px solid var(--mms-field-border);
+  border-radius: 0;
+  background: var(--mms-field-bg);
+  color: var(--mms-text);
+  font: var(--mms-font-control);
+  text-align: left;
+  cursor: pointer;
+}
+
+[data-skin="mms"] .combobox-value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+[data-skin="mms"] .combobox-caret {
+  color: var(--mms-text-muted);
+  font-size: 9px;
+}
+
+[data-skin="mms"] .combobox-hint {
+  color: var(--mms-text-muted);
+}
+
+[data-skin="mms"] .combobox-popup {
+  position: absolute;
+  top: 22px;
+  right: 0;
+  z-index: 50;
+  border: 1px solid var(--mms-field-border);
+  background: var(--mms-field-bg);
+  box-shadow: 0 2px 6px var(--mms-shadow);
+}
+
+[data-skin="mms"] .combobox-popup input[type="text"] {
+  display: block;
+  width: 100%;
+  height: 22px;
+  border: 0;
+  border-bottom: 1px solid var(--mms-rule);
+}
+
+[data-skin="mms"] .combobox-popup ul {
+  max-height: 280px;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+
+[data-skin="mms"] .combobox-popup li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 2px 6px;
+  font-size: 11px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+[data-skin="mms"] .combobox-popup li[aria-selected="true"] {
+  font-weight: 700;
+}
+
+[data-skin="mms"] .combobox-popup li.active {
+  background: var(--mms-accent);
+  color: var(--mms-on-accent);
+}
+
+[data-skin="mms"] .combobox-popup li.active .combobox-hint {
+  color: var(--mms-on-accent-muted);
+}
+
+/* Outside the listbox, which may hold only options. */
+[data-skin="mms"] .combobox-empty {
+  padding: 2px 6px;
+  color: var(--mms-text-muted);
+  font-size: 11px;
+  white-space: nowrap;
+}

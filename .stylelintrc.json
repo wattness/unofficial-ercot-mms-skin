@@ -1,0 +1,21 @@
+{
+  "extends": "stylelint-config-standard",
+  "rules": {
+    "color-hex-length": null,
+    "no-descending-specificity": null,
+    "selector-class-pattern": "^[a-z][a-z0-9]*(-[a-z0-9]+)*$",
+    "custom-property-pattern": "^mms-[a-z0-9]+(-[a-z0-9]+)*$",
+    "property-no-vendor-prefix": [
+      true,
+      {
+        "ignoreProperties": ["box-orient", "line-clamp", "font-smoothing"]
+      }
+    ],
+    "value-no-vendor-prefix": [
+      true,
+      {
+        "ignoreValues": ["box"]
+      }
+    ]
+  }
+}

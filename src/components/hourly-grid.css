@@ -1,0 +1,101 @@
+/* One narrow column per hour; values never wrap. */
+[data-skin="mms"] .hourly {
+  border-collapse: collapse;
+  background: var(--mms-surface);
+}
+
+[data-skin="mms"] .hourly th,
+[data-skin="mms"] .hourly td {
+  height: 21px;
+  padding: 0 4px;
+  border: 1px solid var(--mms-rule);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+
+[data-skin="mms"] .hourly th {
+  background: var(--mms-head-bg);
+  font-weight: 700;
+  text-align: center;
+}
+
+[data-skin="mms"] .hourly .row-label {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  min-width: 112px;
+  background: var(--mms-band);
+  font-weight: 700;
+  text-align: left;
+}
+
+[data-skin="mms"] .hourly thead .row-label {
+  z-index: 3;
+  background: var(--mms-corner-bg);
+}
+
+/* Faint only where the value is read, not edited or picked out. */
+[data-skin="mms"] .hourly td.zero {
+  color: var(--mms-text-zero);
+}
+
+[data-skin="mms"] .hourly td.zero.highlight,
+[data-skin="mms"] .hourly td.zero.edited,
+[data-skin="mms"] .hourly td.zero input,
+[data-skin="mms"] .hourly tr[aria-selected="true"] td.zero {
+  color: var(--mms-text-muted);
+}
+
+[data-skin="mms"] .hourly td.neg {
+  color: var(--mms-qty-negative);
+}
+
+[data-skin="mms"] .hourly td.pos {
+  color: var(--mms-qty-positive);
+}
+
+[data-skin="mms"] .hourly td.highlight,
+[data-skin="mms"] .hourly td.edited {
+  background: var(--mms-cell-highlight-bg);
+}
+
+[data-skin="mms"] .hourly tr[aria-selected="true"] td {
+  background: var(--mms-selected-bg);
+}
+
+[data-skin="mms"] .hourly td:has(> input) {
+  min-width: 62px;
+  padding: 0;
+}
+
+[data-skin="mms"] .hourly td input {
+  width: 100%;
+  height: 19px;
+  padding: 0 2px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  font-size: 10px;
+  text-align: right;
+  appearance: textfield;
+}
+
+/* Spinners reserve width even when hidden and crop the last digit. */
+[data-skin="mms"] .hourly td input::-webkit-outer-spin-button,
+[data-skin="mms"] .hourly td input::-webkit-inner-spin-button {
+  margin: 0;
+  appearance: none;
+}
+
+[data-skin="mms"] .hourly td input:hover {
+  border-color: var(--mms-field-border);
+  background: var(--mms-field-bg);
+}
+
+[data-skin="mms"] .hourly td input:focus {
+  border-color: var(--mms-accent);
+  background: var(--mms-field-bg);
+}

@@ -1,0 +1,38 @@
+[data-skin="mms"] .statusbar {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 22px;
+  padding: 0 10px;
+  border-top: 1px solid var(--mms-rule);
+  background: var(--mms-bg);
+  font-size: 10px;
+}
+
+[data-skin="mms"] .statusbar-code {
+  padding: 0 5px;
+  border: 1px solid currentcolor;
+  font-weight: 700;
+}
+
+[data-skin="mms"] .statusbar-code.ok {
+  color: var(--mms-success);
+}
+
+[data-skin="mms"] .statusbar-code.warn {
+  color: var(--mms-warning);
+}
+
+[data-skin="mms"] .statusbar-code.bad {
+  color: var(--mms-danger);
+}
+
+[data-skin="mms"] .statusbar-stamp {
+  color: var(--mms-text-muted);
+  font-variant-numeric: tabular-nums;
+}

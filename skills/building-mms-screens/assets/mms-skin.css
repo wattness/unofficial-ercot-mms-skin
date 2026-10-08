@@ -1,0 +1,1367 @@
+/* unofficial-ercot-mms-skin 0.1.0. Unofficial; not affiliated with or endorsed by ERCOT. */
+/*
+ * Every rule is scoped under [data-skin="mms"], so importing this file changes
+ * nothing until <html data-skin="mms"> is set.
+ */
+/*
+ * Design tokens. Components use these and never a colour literal.
+ * Values marked "sampled" are checked against the source screenshot by
+ * scripts/verify-provenance.mjs.
+ */
+:root[data-skin="mms"] {
+  color-scheme: light;
+
+  /* Surfaces */
+  --mms-bg: #ecece2; /* sampled */
+  --mms-surface: #fcfbf5; /* sampled */
+  --mms-band: #ccccbc; /* sampled */
+  --mms-panel: #e6e6e6;
+  --mms-title-band: #b8c9e2; /* sampled */
+  --mms-title-band-border: #8fa6c4;
+  --mms-corner-bg: #e4e4d6;
+  --mms-head-bg: #fff; /* sampled */
+  --mms-field-bg: #fff;
+  --mms-field-disabled-bg: #f0f0ea;
+  --mms-unavailable-bg: #f4f2e8;
+
+  /* Text */
+  --mms-text: #1a1a1a;
+  --mms-text-strong: #000;
+  --mms-text-secondary: #4b4b40;
+  --mms-text-muted: #5a5a4e;
+  --mms-text-disabled: #8a8a7c;
+  --mms-text-unavailable: #87877a;
+  --mms-text-faint: #b6b6a6;
+  --mms-text-zero: #a3a397;
+  --mms-icon: #333;
+  --mms-on-accent: #fff;
+  --mms-on-accent-muted: #d8dde8;
+
+  /* Lines */
+  --mms-rule: #a8a88c; /* sampled */
+  --mms-rule-soft: #d8d8c8;
+  --mms-field-border: #7f9db9;
+  --mms-accent: #003966; /* sampled */
+  --mms-link-hover: #0a5aa0;
+
+  /* Selection and highlight */
+  --mms-selected-bg: #ffcc66; /* sampled */
+  --mms-row-hover-bg: #f2efdd;
+  --mms-day-hover-bg: #fff0c4;
+  --mms-cell-highlight-bg: #fff3d6;
+  --mms-flag-bg: #fbf6ea;
+  --mms-warn-accent: #c79a3a;
+
+  /* Status */
+  --mms-success: #15602f;
+  --mms-warning: #7a4f00;
+  --mms-danger: #9b1c1c;
+  --mms-danger-border: #8a4040;
+
+  /* Signed quantities: negative reads cool, positive warm */
+  --mms-qty-negative: #14507a;
+  --mms-qty-positive: #6b3a00;
+
+  /* Tabs */
+  --mms-tab-border: #8a8a78;
+  --mms-tab-text: #33332b;
+  --mms-tab-hover-bg: #d8d8c8;
+
+  /* Buttons */
+  --mms-button-top: #fbfbf7;
+  --mms-button-hover-top: #fff;
+  --mms-button-hover-bottom: #dcdccc;
+  --mms-button-border: #77776a;
+  --mms-button-disabled-text: #96968a;
+  --mms-button-small-disabled-text: #a8a89a;
+
+  /* Notes and badges */
+  --mms-note-bg: #f6f4e4;
+  --mms-note-text: #3d3d33;
+  --mms-note-warn-bg: #fdf3df;
+  --mms-note-bad-bg: #fbeceb;
+  --mms-note-bad-border: #b45b57;
+  --mms-badge-text: #7a5a00;
+  --mms-badge-bg: #ffe9b0;
+  --mms-badge-border: #d8b455;
+
+  /* Code */
+  --mms-code-bg: #f4f2e6;
+  --mms-listing-bg: #fbfaf2;
+  --mms-listing-text: #2b2b24;
+
+  /* Market phase tags */
+  --mms-phase-open-bg: #dcefe0;
+  --mms-phase-open-border: #9cc9a6;
+  --mms-phase-closing-bg: #fbecc8;
+  --mms-phase-closing-border: #e0bb62;
+  --mms-phase-urgent-bg: #f6d9d6;
+  --mms-phase-urgent-border: #d99a93;
+  --mms-phase-posted-border: #93a9cb;
+  --mms-phase-adjustment-bg: #d3ebe8;
+  --mms-phase-adjustment-text: #0d5c56;
+  --mms-phase-adjustment-border: #8fc4bd;
+
+  /* Charts (for inline SVG or canvas) */
+  --mms-chart-bg: var(--mms-listing-bg);
+  --mms-chart-grid: var(--mms-rule);
+  --mms-chart-axis: var(--mms-text-muted);
+  --mms-chart-line: var(--mms-accent);
+  --mms-chart-band: var(--mms-title-band);
+  --mms-chart-note: #5f7ea8;
+
+  /* Shadow */
+  --mms-shadow: rgb(0 0 0 / 18%);
+
+  /* Type and metrics */
+  --mms-font: 11px/1.45 verdana, tahoma, geneva, sans-serif;
+  --mms-font-control: 11px verdana, tahoma, sans-serif;
+  --mms-font-mono: ui-monospace, menlo, consolas, monospace;
+  --mms-row-height: 23px; /* sampled: row-rule pitch */
+  --mms-strip-rule: 4px; /* sampled: rule under the tab strip */
+}
+
+[data-skin="mms"] * {
+  box-sizing: border-box;
+}
+
+html[data-skin="mms"],
+[data-skin="mms"] body {
+  height: 100%;
+}
+
+[data-skin="mms"] body {
+  margin: 0;
+  background: var(--mms-bg);
+  color: var(--mms-text);
+  font: var(--mms-font);
+  -webkit-font-smoothing: antialiased;
+}
+
+[data-skin="mms"] .num {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+[data-skin="mms"] .muted {
+  color: var(--mms-text-muted);
+}
+
+[data-skin="mms"] .spacer {
+  flex: 1;
+}
+
+[data-skin="mms"] code,
+[data-skin="mms"] .mono {
+  padding: 0 3px;
+  background: var(--mms-code-bg);
+  font: 10px/1.5 var(--mms-font-mono);
+}
+
+[data-skin="mms"] pre.listing {
+  max-height: 300px;
+  margin: 0;
+  padding: 8px 10px;
+  overflow: auto;
+  border: 1px solid var(--mms-rule);
+  background: var(--mms-listing-bg);
+  color: var(--mms-listing-text);
+  font: 10px/1.5 var(--mms-font-mono);
+  white-space: pre;
+}
+
+[data-skin="mms"] .layout {
+  display: flex;
+  align-items: stretch;
+}
+
+[data-skin="mms"] .layout-main {
+  flex: 1;
+  min-width: 0;
+}
+
+[data-skin="mms"] .content {
+  min-height: calc(100vh - 96px);
+  padding: 0 0 26px;
+  background: var(--mms-bg);
+}
+
+[data-skin="mms"] .prose {
+  padding: 8px 10px 14px;
+}
+
+[data-skin="mms"] .prose h2 {
+  margin: 0 0 6px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+[data-skin="mms"] .prose h3 {
+  margin: 14px 0 4px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+[data-skin="mms"] .prose p {
+  max-width: 110ch;
+  margin: 0 0 8px;
+  line-height: 1.55;
+}
+
+[data-skin="mms"] .masthead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  padding: 6px 12px 5px;
+  border-bottom: 1px solid var(--mms-rule);
+  background: var(--mms-bg);
+}
+
+[data-skin="mms"] .masthead-title {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+
+/* Environment marker, e.g. TEST or DEMO. */
+[data-skin="mms"] .env-badge {
+  padding: 1px 6px;
+  border-radius: 2px;
+  background: var(--mms-danger);
+  color: var(--mms-on-accent);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+}
+
+[data-skin="mms"] .masthead-user {
+  color: var(--mms-text-muted);
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+[data-skin="mms"] .masthead-user b {
+  color: var(--mms-text);
+  font-weight: 700;
+}
+
+[data-skin="mms"] .masthead-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+}
+
+[data-skin="mms"] .masthead-controls label {
+  color: var(--mms-text-muted);
+  white-space: nowrap;
+}
+
+[data-skin="mms"] select.compact {
+  height: 17px;
+  padding: 0 2px;
+  font-family: var(--mms-font-mono);
+  font-size: 10px;
+}
+
+/* Popups anchored in the masthead sit at the right edge, so they open leftwards. */
+[data-skin="mms"] .masthead .calendar,
+[data-skin="mms"] .masthead .popover {
+  right: 0;
+  left: auto;
+}
+
+/* Market time, the viewer's local time, and tags for the current market phases. */
+[data-skin="mms"] .clock {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+[data-skin="mms"] .clock-market b {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+[data-skin="mms"] .clock-local {
+  color: var(--mms-text-muted);
+}
+
+[data-skin="mms"] .phase {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 6px;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  font: inherit;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  line-height: 15px;
+}
+
+[data-skin="mms"] button.phase {
+  cursor: pointer;
+}
+
+[data-skin="mms"] .phase:focus-visible {
+  outline: 2px solid var(--mms-accent);
+  outline-offset: 1px;
+}
+
+[data-skin="mms"] .phase-detail {
+  font-weight: 400;
+}
+
+[data-skin="mms"] .phase.open {
+  border-color: var(--mms-phase-open-border);
+  background: var(--mms-phase-open-bg);
+  color: var(--mms-success);
+}
+
+[data-skin="mms"] .phase.closing {
+  border-color: var(--mms-phase-closing-border);
+  background: var(--mms-phase-closing-bg);
+  color: var(--mms-warning);
+}
+
+[data-skin="mms"] .phase.urgent {
+  border-color: var(--mms-phase-urgent-border);
+  background: var(--mms-phase-urgent-bg);
+  color: var(--mms-danger);
+}
+
+[data-skin="mms"] .phase.clearing {
+  background: var(--mms-accent);
+  color: var(--mms-on-accent);
+}
+
+[data-skin="mms"] .phase.posted {
+  border-color: var(--mms-phase-posted-border);
+  background: var(--mms-title-band);
+  color: var(--mms-accent);
+}
+
+[data-skin="mms"] .phase.adjustment {
+  border-color: var(--mms-phase-adjustment-border);
+  background: var(--mms-phase-adjustment-bg);
+  color: var(--mms-phase-adjustment-text);
+}
+
+[data-skin="mms"] .phase.realtime {
+  border-color: var(--mms-rule);
+  background: var(--mms-surface);
+  color: var(--mms-text);
+  font-weight: 700;
+}
+
+[data-skin="mms"] .phase.idle {
+  border-color: var(--mms-rule);
+  background: var(--mms-surface);
+  color: var(--mms-text-muted);
+  font-weight: 400;
+}
+
+[data-skin="mms"] .countdown {
+  color: var(--mms-text);
+}
+
+[data-skin="mms"] .countdown b {
+  font-weight: 700;
+}
+
+[data-skin="mms"] .countdown.closing b {
+  color: var(--mms-warning);
+}
+
+[data-skin="mms"] .countdown.urgent b {
+  color: var(--mms-danger);
+}
+
+[data-skin="mms"] .sidenav {
+  position: sticky;
+  top: 0;
+  flex: 0 0 176px;
+  align-self: flex-start;
+  max-height: 100vh;
+  padding: 4px 0 12px;
+  overflow-y: auto;
+  border-right: 1px solid var(--mms-rule);
+  background: var(--mms-panel);
+}
+
+[data-skin="mms"] .sidenav.collapsed {
+  flex-basis: 22px;
+}
+
+[data-skin="mms"] .sidenav-toggle {
+  display: block;
+  margin: 0 4px 0 auto;
+  padding: 0 5px;
+  border: 1px solid var(--mms-rule);
+  background: var(--mms-bg);
+  color: var(--mms-text-muted);
+  font: inherit;
+  font-size: 11px;
+  line-height: 16px;
+  cursor: pointer;
+}
+
+[data-skin="mms"] .sidenav.collapsed .sidenav-toggle {
+  margin: 0 auto;
+}
+
+[data-skin="mms"] .sidenav-heading {
+  margin: 8px 0 2px;
+  padding: 4px 10px;
+  border-top: 1px solid var(--mms-rule);
+  border-bottom: 1px solid var(--mms-rule);
+  background: var(--mms-band);
+  color: var(--mms-tab-text);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  cursor: default;
+}
+
+[data-skin="mms"] .sidenav-item {
+  display: block;
+  width: 100%;
+  padding: 3px 10px 3px 16px;
+  overflow: hidden;
+  border: 0;
+  background: none;
+  color: var(--mms-text);
+  font: inherit;
+  font-size: 11px;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+[data-skin="mms"] .sidenav-item:hover {
+  background: var(--mms-tab-hover-bg);
+}
+
+[data-skin="mms"] .sidenav-item:focus-visible {
+  outline: 2px solid var(--mms-accent);
+  outline-offset: -2px;
+}
+
+[data-skin="mms"] .sidenav-item[aria-current="page"] {
+  background: var(--mms-accent);
+  color: var(--mms-on-accent);
+  font-weight: 700;
+}
+
+[data-skin="mms"] .sidenav-item[aria-disabled="true"] {
+  color: var(--mms-text-unavailable);
+  font-style: italic;
+}
+
+[data-skin="mms"] .sidenav-item[aria-disabled="true"][aria-current="page"] {
+  color: var(--mms-on-accent);
+}
+
+[data-skin="mms"] .tabstrip {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  padding: 5px 10px 0;
+  overflow-x: auto;
+  background: var(--mms-surface);
+}
+
+[data-skin="mms"] .tabstrip::-webkit-scrollbar {
+  height: 6px;
+}
+
+[data-skin="mms"] .tabstrip::-webkit-scrollbar-thumb {
+  background: var(--mms-band);
+}
+
+/*
+ * Plumb left edge, slanted right edge, so each tab leans into the next.
+ * A border does not follow clip-path, so the edge is the clipped button and
+ * the face is a clipped span inset 1px.
+ */
+[data-skin="mms"] .tab {
+  position: relative;
+  flex: 0 0 auto;
+  height: 21px;
+  padding: 0;
+  border: 0;
+  background: var(--mms-tab-border);
+  font: inherit;
+  cursor: pointer;
+  clip-path: polygon(0 0, calc(100% - 11px) 0, 100% 100%, 0 100%);
+}
+
+[data-skin="mms"] .tab > span {
+  display: block;
+  height: 19px;
+  margin: 1px 1px 0;
+  padding: 0 18px 0 11px;
+  background: var(--mms-band);
+  color: var(--mms-tab-text);
+  line-height: 19px;
+  white-space: nowrap;
+  clip-path: polygon(0 0, calc(100% - 11px) 0, 100% 100%, 0 100%);
+}
+
+[data-skin="mms"] .tab:hover > span {
+  background: var(--mms-tab-hover-bg);
+}
+
+[data-skin="mms"] .tab[aria-selected="true"] {
+  height: 24px;
+}
+
+[data-skin="mms"] .tab[aria-selected="true"] > span {
+  height: 23px;
+  background: var(--mms-bg);
+  color: var(--mms-text-strong);
+  font-weight: 700;
+  line-height: 22px;
+}
+
+[data-skin="mms"] .tab[aria-disabled="true"] > span {
+  color: var(--mms-text-unavailable);
+  font-style: italic;
+}
+
+[data-skin="mms"] .tabstrip-rule {
+  height: var(--mms-strip-rule);
+  background: var(--mms-accent);
+}
+
+[data-skin="mms"] .section {
+  margin: 0 0 10px;
+}
+
+[data-skin="mms"] .section-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  height: 20px;
+  padding: 0 8px;
+  border: 0;
+  background: var(--mms-band);
+  color: var(--mms-text-strong);
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  user-select: none;
+}
+
+[data-skin="mms"] .section-caret {
+  width: 9px;
+  color: var(--mms-icon);
+  font-size: 8px;
+}
+
+[data-skin="mms"] .section-note {
+  margin-left: auto;
+  color: var(--mms-text-secondary);
+  font-weight: 400;
+}
+
+[data-skin="mms"] .query {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px 14px;
+  padding: 9px 10px;
+  background: var(--mms-panel);
+}
+
+[data-skin="mms"] .query-field {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+[data-skin="mms"] .query label {
+  white-space: nowrap;
+}
+
+[data-skin="mms"] .actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 10px;
+  background: var(--mms-band);
+}
+
+[data-skin="mms"] .actions-hint {
+  color: var(--mms-text-secondary);
+  font-size: 10px;
+}
+
+[data-skin="mms"] input[type="text"],
+[data-skin="mms"] input[type="date"],
+[data-skin="mms"] input[type="number"],
+[data-skin="mms"] select {
+  height: 19px;
+  padding: 0 3px;
+  border: 1px solid var(--mms-field-border);
+  border-radius: 0;
+  background: var(--mms-field-bg);
+  color: var(--mms-text);
+  font: var(--mms-font-control);
+}
+
+[data-skin="mms"] input[type="number"] {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+[data-skin="mms"] select {
+  height: 20px;
+  padding-right: 2px;
+}
+
+[data-skin="mms"] input:focus,
+[data-skin="mms"] select:focus,
+[data-skin="mms"] button:focus-visible {
+  outline: 2px solid var(--mms-accent);
+  outline-offset: -1px;
+}
+
+[data-skin="mms"] input:disabled,
+[data-skin="mms"] select:disabled {
+  background: var(--mms-field-disabled-bg);
+  color: var(--mms-text-disabled);
+}
+
+[data-skin="mms"] input::placeholder {
+  color: var(--mms-text-muted);
+  font-style: italic;
+}
+
+[data-skin="mms"] .checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+[data-skin="mms"] .checkbox input {
+  width: 13px;
+  height: 13px;
+  margin: 0;
+  accent-color: var(--mms-accent);
+}
+
+[data-skin="mms"] button.btn {
+  min-width: 74px;
+  height: 21px;
+  padding: 0 10px;
+  border: 1px solid var(--mms-button-border);
+  background: linear-gradient(var(--mms-button-top), var(--mms-band));
+  color: var(--mms-text);
+  font: var(--mms-font-control);
+  cursor: pointer;
+}
+
+[data-skin="mms"] button.btn:hover:not(:disabled) {
+  background: linear-gradient(var(--mms-button-hover-top), var(--mms-button-hover-bottom));
+}
+
+[data-skin="mms"] button.btn:active:not(:disabled) {
+  padding-top: 1px;
+  background: var(--mms-band);
+}
+
+[data-skin="mms"] button.btn:disabled {
+  background: var(--mms-band);
+  color: var(--mms-button-disabled-text);
+  cursor: not-allowed;
+}
+
+[data-skin="mms"] button.btn.primary {
+  border-color: var(--mms-accent);
+  font-weight: 700;
+}
+
+[data-skin="mms"] button.btn.danger {
+  border-color: var(--mms-danger-border);
+  color: var(--mms-danger);
+}
+
+/* Looks like a link; changes what the screen shows rather than navigating. */
+[data-skin="mms"] .link-button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--mms-accent);
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+[data-skin="mms"] .link-button:hover {
+  color: var(--mms-link-hover);
+}
+
+/* A date field beside a calendar button; the calendar is a real month grid. */
+[data-skin="mms"] .datepicker {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+[data-skin="mms"] .datepicker-field {
+  width: 96px;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+
+[data-skin="mms"] .datepicker-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 21px;
+  height: 19px;
+  padding: 0;
+  border: 1px solid var(--mms-button-border);
+  background: linear-gradient(var(--mms-button-top), var(--mms-band));
+  cursor: pointer;
+}
+
+[data-skin="mms"] .datepicker-button:hover:not(:disabled) {
+  background: linear-gradient(var(--mms-button-hover-top), var(--mms-button-hover-bottom));
+}
+
+[data-skin="mms"] .datepicker-button:active:not(:disabled) {
+  background: var(--mms-band);
+}
+
+[data-skin="mms"] .datepicker-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+[data-skin="mms"] .calendar {
+  position: absolute;
+  top: 22px;
+  left: 0;
+  z-index: 40;
+  padding: 4px;
+  border: 1px solid var(--mms-button-border);
+  background: var(--mms-surface);
+  box-shadow: 2px 3px 0 var(--mms-shadow);
+}
+
+[data-skin="mms"] .calendar-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 2px 4px 4px;
+  font-weight: 700;
+}
+
+[data-skin="mms"] .calendar-head span {
+  flex: 1;
+  text-align: center;
+  white-space: nowrap;
+}
+
+[data-skin="mms"] .calendar-head button {
+  width: 18px;
+  height: 17px;
+  padding: 0;
+  border: 1px solid var(--mms-button-border);
+  background: linear-gradient(var(--mms-button-top), var(--mms-band));
+  font: inherit;
+  line-height: 1;
+  cursor: pointer;
+}
+
+[data-skin="mms"] .calendar-head button:hover:not(:disabled) {
+  background: linear-gradient(var(--mms-button-hover-top), var(--mms-button-hover-bottom));
+}
+
+[data-skin="mms"] .calendar-head button:disabled {
+  color: var(--mms-button-small-disabled-text);
+  cursor: not-allowed;
+}
+
+[data-skin="mms"] .calendar-grid {
+  border-collapse: collapse;
+}
+
+[data-skin="mms"] .calendar-grid th {
+  width: 24px;
+  height: 17px;
+  border: 1px solid var(--mms-rule);
+  background: var(--mms-band);
+  color: var(--mms-text-secondary);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+[data-skin="mms"] .calendar-grid td {
+  padding: 0;
+  border: 1px solid var(--mms-rule-soft);
+}
+
+[data-skin="mms"] .calendar-grid td.pad {
+  background: var(--mms-unavailable-bg);
+}
+
+[data-skin="mms"] .calendar-day {
+  width: 24px;
+  height: 20px;
+  padding: 0;
+  border: 0;
+  background: var(--mms-surface);
+  color: var(--mms-text);
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+
+[data-skin="mms"] .calendar-day:hover:not(:disabled) {
+  background: var(--mms-day-hover-bg);
+}
+
+/* Same colour as a selected grid row, so "chosen" means one thing. */
+[data-skin="mms"] .calendar-day[aria-pressed="true"] {
+  background: var(--mms-selected-bg);
+  font-weight: 700;
+}
+
+/* Unavailable days are drawn, not omitted: the month's shape shows the gaps. */
+[data-skin="mms"] .calendar-day:disabled {
+  background: var(--mms-unavailable-bg);
+  color: var(--mms-text-faint);
+  cursor: not-allowed;
+}
+
+[data-skin="mms"] .calendar-foot {
+  max-width: 176px;
+  margin-top: 4px;
+  padding: 3px 4px 1px;
+  border-top: 1px solid var(--mms-rule);
+  color: var(--mms-text-muted);
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+/* A select with a search box, drawn with the same field look as <select>. */
+[data-skin="mms"] .combobox {
+  position: relative;
+  display: inline-block;
+}
+
+[data-skin="mms"] .combobox-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  height: 20px;
+  padding: 0 3px 0 4px;
+  border: 1px solid var(--mms-field-border);
+  border-radius: 0;
+  background: var(--mms-field-bg);
+  color: var(--mms-text);
+  font: var(--mms-font-control);
+  text-align: left;
+  cursor: pointer;
+}
+
+[data-skin="mms"] .combobox-value {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+[data-skin="mms"] .combobox-caret {
+  color: var(--mms-text-muted);
+  font-size: 9px;
+}
+
+[data-skin="mms"] .combobox-hint {
+  color: var(--mms-text-muted);
+}
+
+[data-skin="mms"] .combobox-popup {
+  position: absolute;
+  top: 22px;
+  right: 0;
+  z-index: 50;
+  border: 1px solid var(--mms-field-border);
+  background: var(--mms-field-bg);
+  box-shadow: 0 2px 6px var(--mms-shadow);
+}
+
+[data-skin="mms"] .combobox-popup input[type="text"] {
+  display: block;
+  width: 100%;
+  height: 22px;
+  border: 0;
+  border-bottom: 1px solid var(--mms-rule);
+}
+
+[data-skin="mms"] .combobox-popup ul {
+  max-height: 280px;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+
+[data-skin="mms"] .combobox-popup li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 2px 6px;
+  font-size: 11px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+[data-skin="mms"] .combobox-popup li[aria-selected="true"] {
+  font-weight: 700;
+}
+
+[data-skin="mms"] .combobox-popup li.active {
+  background: var(--mms-accent);
+  color: var(--mms-on-accent);
+}
+
+[data-skin="mms"] .combobox-popup li.active .combobox-hint {
+  color: var(--mms-on-accent-muted);
+}
+
+/* Outside the listbox, which may hold only options. */
+[data-skin="mms"] .combobox-empty {
+  padding: 2px 6px;
+  color: var(--mms-text-muted);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+[data-skin="mms"] .grid-title {
+  min-height: 20px;
+  padding: 0 8px;
+  border-bottom: 1px solid var(--mms-title-band-border);
+  background: var(--mms-title-band);
+  font-weight: 700;
+  line-height: 20px;
+}
+
+[data-skin="mms"] .grid-scroll {
+  max-height: 340px;
+  overflow: auto;
+  border-bottom: 1px solid var(--mms-rule);
+}
+
+/* overflow: auto clips popovers even when nothing scrolls. */
+[data-skin="mms"] .grid-scroll.no-clip {
+  max-height: none;
+  overflow: visible;
+}
+
+[data-skin="mms"] .grid {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--mms-surface);
+}
+
+[data-skin="mms"] .grid th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  height: var(--mms-row-height);
+  padding: 0 8px;
+  border-bottom: 1px solid var(--mms-rule);
+  background: var(--mms-head-bg);
+  font-weight: 700;
+  text-align: left;
+  white-space: nowrap;
+}
+
+[data-skin="mms"] .grid td {
+  height: var(--mms-row-height);
+  padding: 0 8px;
+  border-bottom: 1px solid var(--mms-rule);
+  white-space: nowrap;
+}
+
+[data-skin="mms"] .grid th.num,
+[data-skin="mms"] .grid td.num {
+  text-align: right;
+}
+
+[data-skin="mms"] .grid tbody tr {
+  background: var(--mms-surface);
+  cursor: default;
+}
+
+[data-skin="mms"] .grid tbody tr.selectable {
+  cursor: pointer;
+}
+
+[data-skin="mms"] .grid tbody tr.selectable:hover {
+  background: var(--mms-row-hover-bg);
+}
+
+/* Draws attention without the selection colour; selection, below, still wins. */
+[data-skin="mms"] .grid tbody tr.flagged {
+  background: var(--mms-flag-bg);
+}
+
+[data-skin="mms"] .grid tbody tr.flagged td:first-child {
+  box-shadow: inset 3px 0 0 var(--mms-warn-accent);
+}
+
+[data-skin="mms"] .grid tbody tr[aria-selected="true"],
+[data-skin="mms"] .grid tbody tr[aria-selected="true"]:hover {
+  background: var(--mms-selected-bg);
+}
+
+[data-skin="mms"] .grid td.empty {
+  color: var(--mms-text-muted);
+  font-style: italic;
+}
+
+/* Keeps the row pitch fixed; put the full value in a title attribute. */
+[data-skin="mms"] .grid td.truncate {
+  max-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+[data-skin="mms"] .clamp-3 {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--mms-text-muted);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+[data-skin="mms"] .money td.num {
+  font-variant-numeric: tabular-nums;
+}
+
+[data-skin="mms"] .money td.neg {
+  color: var(--mms-danger);
+}
+
+[data-skin="mms"] .grid td.multiline {
+  white-space: normal;
+}
+
+/* One narrow column per hour; values never wrap. */
+[data-skin="mms"] .hourly {
+  border-collapse: collapse;
+  background: var(--mms-surface);
+}
+
+[data-skin="mms"] .hourly th,
+[data-skin="mms"] .hourly td {
+  height: 21px;
+  padding: 0 4px;
+  border: 1px solid var(--mms-rule);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+
+[data-skin="mms"] .hourly th {
+  background: var(--mms-head-bg);
+  font-weight: 700;
+  text-align: center;
+}
+
+[data-skin="mms"] .hourly .row-label {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  min-width: 112px;
+  background: var(--mms-band);
+  font-weight: 700;
+  text-align: left;
+}
+
+[data-skin="mms"] .hourly thead .row-label {
+  z-index: 3;
+  background: var(--mms-corner-bg);
+}
+
+/* Faint only where the value is read, not edited or picked out. */
+[data-skin="mms"] .hourly td.zero {
+  color: var(--mms-text-zero);
+}
+
+[data-skin="mms"] .hourly td.zero.highlight,
+[data-skin="mms"] .hourly td.zero.edited,
+[data-skin="mms"] .hourly td.zero input,
+[data-skin="mms"] .hourly tr[aria-selected="true"] td.zero {
+  color: var(--mms-text-muted);
+}
+
+[data-skin="mms"] .hourly td.neg {
+  color: var(--mms-qty-negative);
+}
+
+[data-skin="mms"] .hourly td.pos {
+  color: var(--mms-qty-positive);
+}
+
+[data-skin="mms"] .hourly td.highlight,
+[data-skin="mms"] .hourly td.edited {
+  background: var(--mms-cell-highlight-bg);
+}
+
+[data-skin="mms"] .hourly tr[aria-selected="true"] td {
+  background: var(--mms-selected-bg);
+}
+
+[data-skin="mms"] .hourly td:has(> input) {
+  min-width: 62px;
+  padding: 0;
+}
+
+[data-skin="mms"] .hourly td input {
+  width: 100%;
+  height: 19px;
+  padding: 0 2px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  font-size: 10px;
+  text-align: right;
+  appearance: textfield;
+}
+
+/* Spinners reserve width even when hidden and crop the last digit. */
+[data-skin="mms"] .hourly td input::-webkit-outer-spin-button,
+[data-skin="mms"] .hourly td input::-webkit-inner-spin-button {
+  margin: 0;
+  appearance: none;
+}
+
+[data-skin="mms"] .hourly td input:hover {
+  border-color: var(--mms-field-border);
+  background: var(--mms-field-bg);
+}
+
+[data-skin="mms"] .hourly td input:focus {
+  border-color: var(--mms-accent);
+  background: var(--mms-field-bg);
+}
+
+[data-skin="mms"] .note {
+  margin: 0;
+  padding: 8px 10px;
+  border-left: 3px solid var(--mms-rule);
+  background: var(--mms-note-bg);
+  color: var(--mms-note-text);
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+[data-skin="mms"] .note b {
+  color: var(--mms-text);
+}
+
+[data-skin="mms"] .note.warn {
+  border-left-color: var(--mms-warn-accent);
+  background: var(--mms-note-warn-bg);
+}
+
+[data-skin="mms"] .note.bad {
+  border-left-color: var(--mms-note-bad-border);
+  background: var(--mms-note-bad-bg);
+}
+
+[data-skin="mms"] ul.note {
+  margin: 0;
+  padding-left: 28px;
+}
+
+/* Inline counterpart of .note, for a remark inside a cell or a line. */
+[data-skin="mms"] .aside {
+  color: var(--mms-text-muted);
+  font-size: 10px;
+}
+
+[data-skin="mms"] .aside b {
+  color: var(--mms-text);
+  font-weight: 700;
+}
+
+[data-skin="mms"] .pill {
+  display: inline-block;
+  padding: 0 5px;
+  border: 1px solid currentcolor;
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+[data-skin="mms"] .pill.ok {
+  color: var(--mms-success);
+}
+
+[data-skin="mms"] .pill.warn {
+  color: var(--mms-warning);
+}
+
+[data-skin="mms"] .pill.bad {
+  color: var(--mms-danger);
+}
+
+[data-skin="mms"] .pill.muted {
+  color: var(--mms-text-muted);
+}
+
+[data-skin="mms"] .badge {
+  display: inline-block;
+  margin-left: 5px;
+  padding: 0 4px;
+  border: 1px solid var(--mms-badge-border);
+  background: var(--mms-badge-bg);
+  color: var(--mms-badge-text);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  vertical-align: 1px;
+}
+
+/* A term with an info mark; its .popover shows on hover or keyboard focus. */
+[data-skin="mms"] .info {
+  position: relative;
+  white-space: nowrap;
+}
+
+[data-skin="mms"] .info:focus {
+  outline: 2px solid var(--mms-accent);
+  outline-offset: 1px;
+}
+
+[data-skin="mms"] .info-mark {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  margin-left: 4px;
+  border-radius: 50%;
+  background: var(--mms-text-muted);
+  color: var(--mms-surface);
+  font-family: georgia, serif;
+  font-size: 9px;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 11px;
+  text-align: center;
+  vertical-align: 1px;
+  cursor: help;
+}
+
+[data-skin="mms"] .info:hover .info-mark,
+[data-skin="mms"] .info:focus-within .info-mark {
+  background: var(--mms-accent);
+}
+
+[data-skin="mms"] .popover {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 20;
+  display: none;
+  width: 340px;
+  margin-top: 4px;
+  padding: 6px 8px;
+  border: 1px solid var(--mms-rule);
+  background: var(--mms-surface);
+  box-shadow: 2px 2px 0 var(--mms-shadow);
+  color: var(--mms-text);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.45;
+  text-align: left;
+  white-space: normal;
+}
+
+[data-skin="mms"] .info:hover .popover,
+[data-skin="mms"] .info:focus-within .popover {
+  display: block;
+}
+
+[data-skin="mms"] .popover b {
+  color: var(--mms-accent);
+}
+
+[data-skin="mms"] .popover i {
+  color: var(--mms-text-muted);
+}
+
+/* Near the right edge, open leftwards instead of off-screen. */
+[data-skin="mms"] td:last-child .popover,
+[data-skin="mms"] th:last-child .popover {
+  right: 0;
+  left: auto;
+}
+
+[data-skin="mms"] .statusbar {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 22px;
+  padding: 0 10px;
+  border-top: 1px solid var(--mms-rule);
+  background: var(--mms-bg);
+  font-size: 10px;
+}
+
+[data-skin="mms"] .statusbar-code {
+  padding: 0 5px;
+  border: 1px solid currentcolor;
+  font-weight: 700;
+}
+
+[data-skin="mms"] .statusbar-code.ok {
+  color: var(--mms-success);
+}
+
+[data-skin="mms"] .statusbar-code.warn {
+  color: var(--mms-warning);
+}
+
+[data-skin="mms"] .statusbar-code.bad {
+  color: var(--mms-danger);
+}
+
+[data-skin="mms"] .statusbar-stamp {
+  color: var(--mms-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+

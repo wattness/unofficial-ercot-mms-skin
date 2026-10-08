@@ -1,0 +1,111 @@
+[data-skin="mms"] .grid-title {
+  min-height: 20px;
+  padding: 0 8px;
+  border-bottom: 1px solid var(--mms-title-band-border);
+  background: var(--mms-title-band);
+  font-weight: 700;
+  line-height: 20px;
+}
+
+[data-skin="mms"] .grid-scroll {
+  max-height: 340px;
+  overflow: auto;
+  border-bottom: 1px solid var(--mms-rule);
+}
+
+/* overflow: auto clips popovers even when nothing scrolls. */
+[data-skin="mms"] .grid-scroll.no-clip {
+  max-height: none;
+  overflow: visible;
+}
+
+[data-skin="mms"] .grid {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--mms-surface);
+}
+
+[data-skin="mms"] .grid th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  height: var(--mms-row-height);
+  padding: 0 8px;
+  border-bottom: 1px solid var(--mms-rule);
+  background: var(--mms-head-bg);
+  font-weight: 700;
+  text-align: left;
+  white-space: nowrap;
+}
+
+[data-skin="mms"] .grid td {
+  height: var(--mms-row-height);
+  padding: 0 8px;
+  border-bottom: 1px solid var(--mms-rule);
+  white-space: nowrap;
+}
+
+[data-skin="mms"] .grid th.num,
+[data-skin="mms"] .grid td.num {
+  text-align: right;
+}
+
+[data-skin="mms"] .grid tbody tr {
+  background: var(--mms-surface);
+  cursor: default;
+}
+
+[data-skin="mms"] .grid tbody tr.selectable {
+  cursor: pointer;
+}
+
+[data-skin="mms"] .grid tbody tr.selectable:hover {
+  background: var(--mms-row-hover-bg);
+}
+
+/* Draws attention without the selection colour; selection, below, still wins. */
+[data-skin="mms"] .grid tbody tr.flagged {
+  background: var(--mms-flag-bg);
+}
+
+[data-skin="mms"] .grid tbody tr.flagged td:first-child {
+  box-shadow: inset 3px 0 0 var(--mms-warn-accent);
+}
+
+[data-skin="mms"] .grid tbody tr[aria-selected="true"],
+[data-skin="mms"] .grid tbody tr[aria-selected="true"]:hover {
+  background: var(--mms-selected-bg);
+}
+
+[data-skin="mms"] .grid td.empty {
+  color: var(--mms-text-muted);
+  font-style: italic;
+}
+
+/* Keeps the row pitch fixed; put the full value in a title attribute. */
+[data-skin="mms"] .grid td.truncate {
+  max-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+[data-skin="mms"] .clamp-3 {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--mms-text-muted);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+[data-skin="mms"] .money td.num {
+  font-variant-numeric: tabular-nums;
+}
+
+[data-skin="mms"] .money td.neg {
+  color: var(--mms-danger);
+}
+
+[data-skin="mms"] .grid td.multiline {
+  white-space: normal;
+}

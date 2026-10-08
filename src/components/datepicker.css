@@ -1,0 +1,146 @@
+/* A date field beside a calendar button; the calendar is a real month grid. */
+[data-skin="mms"] .datepicker {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+[data-skin="mms"] .datepicker-field {
+  width: 96px;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+
+[data-skin="mms"] .datepicker-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 21px;
+  height: 19px;
+  padding: 0;
+  border: 1px solid var(--mms-button-border);
+  background: linear-gradient(var(--mms-button-top), var(--mms-band));
+  cursor: pointer;
+}
+
+[data-skin="mms"] .datepicker-button:hover:not(:disabled) {
+  background: linear-gradient(var(--mms-button-hover-top), var(--mms-button-hover-bottom));
+}
+
+[data-skin="mms"] .datepicker-button:active:not(:disabled) {
+  background: var(--mms-band);
+}
+
+[data-skin="mms"] .datepicker-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+[data-skin="mms"] .calendar {
+  position: absolute;
+  top: 22px;
+  left: 0;
+  z-index: 40;
+  padding: 4px;
+  border: 1px solid var(--mms-button-border);
+  background: var(--mms-surface);
+  box-shadow: 2px 3px 0 var(--mms-shadow);
+}
+
+[data-skin="mms"] .calendar-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding: 2px 4px 4px;
+  font-weight: 700;
+}
+
+[data-skin="mms"] .calendar-head span {
+  flex: 1;
+  text-align: center;
+  white-space: nowrap;
+}
+
+[data-skin="mms"] .calendar-head button {
+  width: 18px;
+  height: 17px;
+  padding: 0;
+  border: 1px solid var(--mms-button-border);
+  background: linear-gradient(var(--mms-button-top), var(--mms-band));
+  font: inherit;
+  line-height: 1;
+  cursor: pointer;
+}
+
+[data-skin="mms"] .calendar-head button:hover:not(:disabled) {
+  background: linear-gradient(var(--mms-button-hover-top), var(--mms-button-hover-bottom));
+}
+
+[data-skin="mms"] .calendar-head button:disabled {
+  color: var(--mms-button-small-disabled-text);
+  cursor: not-allowed;
+}
+
+[data-skin="mms"] .calendar-grid {
+  border-collapse: collapse;
+}
+
+[data-skin="mms"] .calendar-grid th {
+  width: 24px;
+  height: 17px;
+  border: 1px solid var(--mms-rule);
+  background: var(--mms-band);
+  color: var(--mms-text-secondary);
+  font-size: 10px;
+  font-weight: 700;
+}
+
+[data-skin="mms"] .calendar-grid td {
+  padding: 0;
+  border: 1px solid var(--mms-rule-soft);
+}
+
+[data-skin="mms"] .calendar-grid td.pad {
+  background: var(--mms-unavailable-bg);
+}
+
+[data-skin="mms"] .calendar-day {
+  width: 24px;
+  height: 20px;
+  padding: 0;
+  border: 0;
+  background: var(--mms-surface);
+  color: var(--mms-text);
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+
+[data-skin="mms"] .calendar-day:hover:not(:disabled) {
+  background: var(--mms-day-hover-bg);
+}
+
+/* Same colour as a selected grid row, so "chosen" means one thing. */
+[data-skin="mms"] .calendar-day[aria-pressed="true"] {
+  background: var(--mms-selected-bg);
+  font-weight: 700;
+}
+
+/* Unavailable days are drawn, not omitted: the month's shape shows the gaps. */
+[data-skin="mms"] .calendar-day:disabled {
+  background: var(--mms-unavailable-bg);
+  color: var(--mms-text-faint);
+  cursor: not-allowed;
+}
+
+[data-skin="mms"] .calendar-foot {
+  max-width: 176px;
+  margin-top: 4px;
+  padding: 3px 4px 1px;
+  border-top: 1px solid var(--mms-rule);
+  color: var(--mms-text-muted);
+  font-size: 10px;
+  line-height: 1.5;
+}

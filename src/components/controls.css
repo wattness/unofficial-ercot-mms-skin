@@ -1,0 +1,105 @@
+[data-skin="mms"] input[type="text"],
+[data-skin="mms"] input[type="date"],
+[data-skin="mms"] input[type="number"],
+[data-skin="mms"] select {
+  height: 19px;
+  padding: 0 3px;
+  border: 1px solid var(--mms-field-border);
+  border-radius: 0;
+  background: var(--mms-field-bg);
+  color: var(--mms-text);
+  font: var(--mms-font-control);
+}
+
+[data-skin="mms"] input[type="number"] {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+[data-skin="mms"] select {
+  height: 20px;
+  padding-right: 2px;
+}
+
+[data-skin="mms"] input:focus,
+[data-skin="mms"] select:focus,
+[data-skin="mms"] button:focus-visible {
+  outline: 2px solid var(--mms-accent);
+  outline-offset: -1px;
+}
+
+[data-skin="mms"] input:disabled,
+[data-skin="mms"] select:disabled {
+  background: var(--mms-field-disabled-bg);
+  color: var(--mms-text-disabled);
+}
+
+[data-skin="mms"] input::placeholder {
+  color: var(--mms-text-muted);
+  font-style: italic;
+}
+
+[data-skin="mms"] .checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+[data-skin="mms"] .checkbox input {
+  width: 13px;
+  height: 13px;
+  margin: 0;
+  accent-color: var(--mms-accent);
+}
+
+[data-skin="mms"] button.btn {
+  min-width: 74px;
+  height: 21px;
+  padding: 0 10px;
+  border: 1px solid var(--mms-button-border);
+  background: linear-gradient(var(--mms-button-top), var(--mms-band));
+  color: var(--mms-text);
+  font: var(--mms-font-control);
+  cursor: pointer;
+}
+
+[data-skin="mms"] button.btn:hover:not(:disabled) {
+  background: linear-gradient(var(--mms-button-hover-top), var(--mms-button-hover-bottom));
+}
+
+[data-skin="mms"] button.btn:active:not(:disabled) {
+  padding-top: 1px;
+  background: var(--mms-band);
+}
+
+[data-skin="mms"] button.btn:disabled {
+  background: var(--mms-band);
+  color: var(--mms-button-disabled-text);
+  cursor: not-allowed;
+}
+
+[data-skin="mms"] button.btn.primary {
+  border-color: var(--mms-accent);
+  font-weight: 700;
+}
+
+[data-skin="mms"] button.btn.danger {
+  border-color: var(--mms-danger-border);
+  color: var(--mms-danger);
+}
+
+/* Looks like a link; changes what the screen shows rather than navigating. */
+[data-skin="mms"] .link-button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--mms-accent);
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+[data-skin="mms"] .link-button:hover {
+  color: var(--mms-link-hover);
+}

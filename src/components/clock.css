@@ -1,0 +1,110 @@
+/* Market time, the viewer's local time, and tags for the current market phases. */
+[data-skin="mms"] .clock {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+[data-skin="mms"] .clock-market b {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+[data-skin="mms"] .clock-local {
+  color: var(--mms-text-muted);
+}
+
+[data-skin="mms"] .phase {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 6px;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  font: inherit;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  line-height: 15px;
+}
+
+[data-skin="mms"] button.phase {
+  cursor: pointer;
+}
+
+[data-skin="mms"] .phase:focus-visible {
+  outline: 2px solid var(--mms-accent);
+  outline-offset: 1px;
+}
+
+[data-skin="mms"] .phase-detail {
+  font-weight: 400;
+}
+
+[data-skin="mms"] .phase.open {
+  border-color: var(--mms-phase-open-border);
+  background: var(--mms-phase-open-bg);
+  color: var(--mms-success);
+}
+
+[data-skin="mms"] .phase.closing {
+  border-color: var(--mms-phase-closing-border);
+  background: var(--mms-phase-closing-bg);
+  color: var(--mms-warning);
+}
+
+[data-skin="mms"] .phase.urgent {
+  border-color: var(--mms-phase-urgent-border);
+  background: var(--mms-phase-urgent-bg);
+  color: var(--mms-danger);
+}
+
+[data-skin="mms"] .phase.clearing {
+  background: var(--mms-accent);
+  color: var(--mms-on-accent);
+}
+
+[data-skin="mms"] .phase.posted {
+  border-color: var(--mms-phase-posted-border);
+  background: var(--mms-title-band);
+  color: var(--mms-accent);
+}
+
+[data-skin="mms"] .phase.adjustment {
+  border-color: var(--mms-phase-adjustment-border);
+  background: var(--mms-phase-adjustment-bg);
+  color: var(--mms-phase-adjustment-text);
+}
+
+[data-skin="mms"] .phase.realtime {
+  border-color: var(--mms-rule);
+  background: var(--mms-surface);
+  color: var(--mms-text);
+  font-weight: 700;
+}
+
+[data-skin="mms"] .phase.idle {
+  border-color: var(--mms-rule);
+  background: var(--mms-surface);
+  color: var(--mms-text-muted);
+  font-weight: 400;
+}
+
+[data-skin="mms"] .countdown {
+  color: var(--mms-text);
+}
+
+[data-skin="mms"] .countdown b {
+  font-weight: 700;
+}
+
+[data-skin="mms"] .countdown.closing b {
+  color: var(--mms-warning);
+}
+
+[data-skin="mms"] .countdown.urgent b {
+  color: var(--mms-danger);
+}

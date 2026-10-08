@@ -1,0 +1,117 @@
+/*
+ * Design tokens. Components use these and never a colour literal.
+ * Values marked "sampled" are checked against the source screenshot by
+ * scripts/verify-provenance.mjs.
+ */
+:root[data-skin="mms"] {
+  color-scheme: light;
+
+  /* Surfaces */
+  --mms-bg: #ecece2; /* sampled */
+  --mms-surface: #fcfbf5; /* sampled */
+  --mms-band: #ccccbc; /* sampled */
+  --mms-panel: #e6e6e6;
+  --mms-title-band: #b8c9e2; /* sampled */
+  --mms-title-band-border: #8fa6c4;
+  --mms-corner-bg: #e4e4d6;
+  --mms-head-bg: #fff; /* sampled */
+  --mms-field-bg: #fff;
+  --mms-field-disabled-bg: #f0f0ea;
+  --mms-unavailable-bg: #f4f2e8;
+
+  /* Text */
+  --mms-text: #1a1a1a;
+  --mms-text-strong: #000;
+  --mms-text-secondary: #4b4b40;
+  --mms-text-muted: #5a5a4e;
+  --mms-text-disabled: #8a8a7c;
+  --mms-text-unavailable: #87877a;
+  --mms-text-faint: #b6b6a6;
+  --mms-text-zero: #a3a397;
+  --mms-icon: #333;
+  --mms-on-accent: #fff;
+  --mms-on-accent-muted: #d8dde8;
+
+  /* Lines */
+  --mms-rule: #a8a88c; /* sampled */
+  --mms-rule-soft: #d8d8c8;
+  --mms-field-border: #7f9db9;
+  --mms-accent: #003966; /* sampled */
+  --mms-link-hover: #0a5aa0;
+
+  /* Selection and highlight */
+  --mms-selected-bg: #ffcc66; /* sampled */
+  --mms-row-hover-bg: #f2efdd;
+  --mms-day-hover-bg: #fff0c4;
+  --mms-cell-highlight-bg: #fff3d6;
+  --mms-flag-bg: #fbf6ea;
+  --mms-warn-accent: #c79a3a;
+
+  /* Status */
+  --mms-success: #15602f;
+  --mms-warning: #7a4f00;
+  --mms-danger: #9b1c1c;
+  --mms-danger-border: #8a4040;
+
+  /* Signed quantities: negative reads cool, positive warm */
+  --mms-qty-negative: #14507a;
+  --mms-qty-positive: #6b3a00;
+
+  /* Tabs */
+  --mms-tab-border: #8a8a78;
+  --mms-tab-text: #33332b;
+  --mms-tab-hover-bg: #d8d8c8;
+
+  /* Buttons */
+  --mms-button-top: #fbfbf7;
+  --mms-button-hover-top: #fff;
+  --mms-button-hover-bottom: #dcdccc;
+  --mms-button-border: #77776a;
+  --mms-button-disabled-text: #96968a;
+  --mms-button-small-disabled-text: #a8a89a;
+
+  /* Notes and badges */
+  --mms-note-bg: #f6f4e4;
+  --mms-note-text: #3d3d33;
+  --mms-note-warn-bg: #fdf3df;
+  --mms-note-bad-bg: #fbeceb;
+  --mms-note-bad-border: #b45b57;
+  --mms-badge-text: #7a5a00;
+  --mms-badge-bg: #ffe9b0;
+  --mms-badge-border: #d8b455;
+
+  /* Code */
+  --mms-code-bg: #f4f2e6;
+  --mms-listing-bg: #fbfaf2;
+  --mms-listing-text: #2b2b24;
+
+  /* Market phase tags */
+  --mms-phase-open-bg: #dcefe0;
+  --mms-phase-open-border: #9cc9a6;
+  --mms-phase-closing-bg: #fbecc8;
+  --mms-phase-closing-border: #e0bb62;
+  --mms-phase-urgent-bg: #f6d9d6;
+  --mms-phase-urgent-border: #d99a93;
+  --mms-phase-posted-border: #93a9cb;
+  --mms-phase-adjustment-bg: #d3ebe8;
+  --mms-phase-adjustment-text: #0d5c56;
+  --mms-phase-adjustment-border: #8fc4bd;
+
+  /* Charts (for inline SVG or canvas) */
+  --mms-chart-bg: var(--mms-listing-bg);
+  --mms-chart-grid: var(--mms-rule);
+  --mms-chart-axis: var(--mms-text-muted);
+  --mms-chart-line: var(--mms-accent);
+  --mms-chart-band: var(--mms-title-band);
+  --mms-chart-note: #5f7ea8;
+
+  /* Shadow */
+  --mms-shadow: rgb(0 0 0 / 18%);
+
+  /* Type and metrics */
+  --mms-font: 11px/1.45 verdana, tahoma, geneva, sans-serif;
+  --mms-font-control: 11px verdana, tahoma, sans-serif;
+  --mms-font-mono: ui-monospace, menlo, consolas, monospace;
+  --mms-row-height: 23px; /* sampled: row-rule pitch */
+  --mms-strip-rule: 4px; /* sampled: rule under the tab strip */
+}

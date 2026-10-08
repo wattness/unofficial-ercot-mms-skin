@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en" data-skin="mms">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>MMS skin demo (made-up data)</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="../dist/mms-skin.css" />
+    <script src="demo.js" defer></script>
+  </head>
+  <body>
+    <header class="masthead">
+      <h1 class="masthead-title">Market Management (demo)</h1>
+      <span class="env-badge">DEMO</span>
+      <span class="badge">Made-up data</span>
+      <span class="spacer"></span>
+      <span class="clock">
+        <span class="clock-market"><b>09:41</b> CT</span>
+        <span class="clock-local">10:41 local</span>
+        <span class="phase open">DAM open<span class="phase-detail">for 09 Mar</span></span>
+        <span class="countdown closing">closes in <b>0:19</b></span>
+        <span class="phase realtime">HE 10</span>
+      </span>
+      <span class="masthead-controls">
+        <label for="operating-day">Operating Day</label>
+        <span class="datepicker">
+          <input id="operating-day" class="datepicker-field" type="text" value="2030-03-08" readonly />
+          <button class="datepicker-button" type="button" aria-label="Open calendar" aria-expanded="false">
+            <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+              <rect x="0.5" y="1.5" width="11" height="10" fill="none" stroke="currentColor" />
+              <path d="M0.5 4.5h11M3 0v3M9 0v3" stroke="currentColor" />
+            </svg>
+          </button>
+        </span>
+        <label id="qse-label">QSE</label>
+        <span class="combobox">
+          <button
+            class="combobox-button"
+            type="button"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+            aria-labelledby="qse-label qse-value"
+          >
+            <span id="qse-value" class="combobox-value">QSE_DEMO_A</span>
+            <span class="combobox-caret" aria-hidden="true">▾</span>
+          </button>
+        </span>
+        <label for="resource">Resource</label>
+        <select id="resource" class="compact">
+          <option>UNIT_A</option>
+          <option>UNIT_B</option>
+          <option>UNIT_C</option>
+        </select>
+      </span>
+      <span class="masthead-user">Signed in as <b>demo.user</b></span>
+    </header>
+
+    <div class="layout">
+      <nav class="sidenav" aria-label="Screens">
+        <button class="sidenav-toggle" type="button" aria-expanded="true" aria-label="Collapse navigation">«</button>
+        <div id="nav-groups">
+          <div role="group" aria-labelledby="nav-dam">
+            <h2 id="nav-dam" class="sidenav-heading">Day-Ahead</h2>
+            <button class="sidenav-item" type="button" aria-current="page">Energy Offers</button>
+            <button class="sidenav-item" type="button">Energy Bids</button>
+            <button class="sidenav-item" type="button">Ancillary Service Offers</button>
+            <button class="sidenav-item" type="button" aria-disabled="true">PTP Obligation Bids</button>
+          </div>
+          <div role="group" aria-labelledby="nav-rt">
+            <h2 id="nav-rt" class="sidenav-heading">Real-Time</h2>
+            <button class="sidenav-item" type="button">Current Operating Plan</button>
+            <button class="sidenav-item" type="button">Output Schedules</button>
+          </div>
+          <div role="group" aria-labelledby="nav-reports">
+            <h2 id="nav-reports" class="sidenav-heading">Reports</h2>
+            <button class="sidenav-item" type="button">Awards</button>
+            <button class="sidenav-item" type="button">Notifications</button>
+          </div>
+        </div>
+      </nav>
+
+      <main class="layout-main">
+        <div class="tabstrip" role="tablist" aria-label="Energy Offers">
+          <button class="tab" type="button" role="tab" id="tab-curve" aria-controls="panel-curve" aria-selected="true">
+            <span>Energy Offer Curve</span>
+          </button>
+          <button class="tab" type="button" role="tab" id="tab-cop" aria-controls="panel-cop" aria-selected="false">
+            <span>Current Operating Plan</span>
+          </button>
+          <button
+            class="tab"
+            type="button"
+            role="tab"
+            id="tab-awards"
+            aria-controls="panel-awards"
+            aria-selected="false"
+          >
+            <span>Awards</span>
+          </button>
+          <button
+            class="tab"
+            type="button"
+            role="tab"
+            id="tab-notices"
+            aria-controls="panel-notices"
+            aria-selected="false"
+          >
+            <span>Notifications</span>
+          </button>
+          <button class="tab" type="button" role="tab" aria-disabled="true" aria-selected="false">
+            <span>PTP Obligation Bids</span>
+          </button>
+        </div>
+        <div class="tabstrip-rule"></div>
+
+        <div class="content">
+          <p class="note warn">
+            <b>Demo data.</b> Every name, number, date and time on this page is made up. This is an unofficial
+            recreation of a public market-system look. It is not ERCOT software and is not affiliated with or endorsed
+            by ERCOT.
+          </p>
+
+          <div id="panel-curve" role="tabpanel" aria-labelledby="tab-curve">
+            <section class="section">
+              <button class="section-header" type="button" aria-expanded="true" aria-controls="query-body">
+                <span class="section-caret" aria-hidden="true">▼</span>Query
+                <span class="section-note">UNIT_A · 2030-03-08</span>
+              </button>
+              <div id="query-body">
+                <div class="query">
+                  <span class="query-field">
+                    <label for="q-status">Status</label>
+                    <select id="q-status">
+                      <option>All</option>
+                      <option>Accepted</option>
+                      <option>Rejected</option>
+                    </select>
+                  </span>
+                  <span class="query-field">
+                    <label for="q-from">Hour Ending from</label>
+                    <input id="q-from" type="number" value="1" min="1" max="24" />
+                  </span>
+                  <span class="query-field">
+                    <label for="q-to">to</label>
+                    <input id="q-to" type="number" value="24" min="1" max="24" />
+                  </span>
+                  <label class="checkbox"><input type="checkbox" checked /> Include expired</label>
+                </div>
+                <div class="actions">
+                  <button class="btn primary" type="button">Submit</button>
+                  <button class="btn" type="button">Copy</button>
+                  <button class="btn danger" type="button">Cancel</button>
+                  <button class="btn" type="button" disabled>Export</button>
+                  <span class="spacer"></span>
+                  <span class="actions-hint">Ctrl+Enter submits</span>
+                </div>
+              </div>
+            </section>
+
+            <section class="section">
+              <div class="grid-title">Energy Offer Curve · UNIT_A · HE 1–24</div>
+              <div class="grid-scroll no-clip">
+                <table class="grid">
+                  <thead>
+                    <tr>
+                      <th scope="col">Point</th>
+                      <th scope="col" class="num">MW</th>
+                      <th scope="col" class="num">
+                        <span class="info" tabindex="0"
+                          >Price ($/MWh)<span class="info-mark" aria-hidden="true">i</span
+                          ><span class="popover" role="tooltip"
+                            ><b>Price</b> for the segment that ends at this MW. <i>Made-up values.</i></span
+                          ></span
+                        >
+                      </th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Note</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="selectable" aria-selected="false">
+                      <td>1</td>
+                      <td class="num">10.0</td>
+                      <td class="num">10.00</td>
+                      <td><span class="pill ok">ACCEPTED</span></td>
+                      <td class="empty">none</td>
+                    </tr>
+                    <tr class="selectable" aria-selected="true">
+                      <td>2</td>
+                      <td class="num">20.0</td>
+                      <td class="num">20.00</td>
+                      <td><span class="pill ok">ACCEPTED</span></td>
+                      <td class="empty">none</td>
+                    </tr>
+                    <tr class="selectable" aria-selected="false">
+                      <td>3</td>
+                      <td class="num">30.0</td>
+                      <td class="num">40.00</td>
+                      <td><span class="pill warn">PENDING</span></td>
+                      <td>
+                        <span class="aside">awaiting <b>validation</b></span>
+                      </td>
+                    </tr>
+                    <tr class="selectable flagged" aria-selected="false">
+                      <td>4</td>
+                      <td class="num">40.0</td>
+                      <td class="num">35.00</td>
+                      <td><span class="pill bad">REJECTED</span></td>
+                      <td><button class="link-button" type="button">Show reason</button></td>
+                    </tr>
+                    <tr class="selectable" aria-selected="false">
+                      <td>5</td>
+                      <td class="num">50.0</td>
+                      <td class="num">160.00</td>
+                      <td><span class="pill muted">EXPIRED</span></td>
+                      <td class="empty">none</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+
+          <div id="panel-cop" role="tabpanel" aria-labelledby="tab-cop" hidden>
+            <section class="section">
+              <div class="grid-title">Current Operating Plan · UNIT_A · 2030-03-08</div>
+              <div class="grid-scroll">
+                <table class="hourly" id="cop-grid"></table>
+              </div>
+            </section>
+            <p class="note">
+              Negative values read cool and positive warm. Zeros in read-only cells are faint. Edited cells are
+              highlighted.
+            </p>
+          </div>
+
+          <div id="panel-awards" role="tabpanel" aria-labelledby="tab-awards" hidden>
+            <section class="section">
+              <div class="grid-title">Day-Ahead energy awards · UNIT_A · 2030-03-08 (made up)</div>
+              <div class="grid-scroll">
+                <table class="grid">
+                  <thead>
+                    <tr>
+                      <th scope="col">Hour Ending</th>
+                      <th scope="col" class="num">Awarded MW</th>
+                      <th scope="col" class="num">Price ($/MWh)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>8</td>
+                      <td class="num">10.0</td>
+                      <td class="num">10.00</td>
+                    </tr>
+                    <tr>
+                      <td>18</td>
+                      <td class="num">30.0</td>
+                      <td class="num">40.00</td>
+                    </tr>
+                    <tr>
+                      <td>19</td>
+                      <td class="num">20.0</td>
+                      <td class="num">20.00</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+
+          <div id="panel-notices" role="tabpanel" aria-labelledby="tab-notices" hidden>
+            <section class="section">
+              <div class="grid-title">Notifications</div>
+              <div class="grid-scroll">
+                <table class="grid">
+                  <thead>
+                    <tr>
+                      <th scope="col">Time</th>
+                      <th scope="col">Type</th>
+                      <th scope="col">Message</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="num">09:12:04</td>
+                      <td><span class="pill ok">OK</span></td>
+                      <td class="multiline">
+                        <div class="clamp-3">
+                          Offer accepted for UNIT_A. This made-up message is long on purpose: a cell holding a long
+                          explanation is clamped to three lines so the row stays compact, and the full text remains
+                          selectable and searchable. The rest of this paragraph only adds length. It repeats that every
+                          name and number on the page is invented, that nothing here comes from a market system, and
+                          that the clamp hides whatever runs past the third line, which this sentence is written to do
+                          at the demo's default width.
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="num">09:20:37</td>
+                      <td><span class="pill bad">ERROR</span></td>
+                      <td
+                        class="truncate"
+                        title="Point 4 rejected: price must not decrease as MW increases (made-up message)."
+                      >
+                        Point 4 rejected: price must not decrease as MW increases (made-up message).
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+            <section class="section">
+              <div class="grid-title">Submission (made-up XML)</div>
+              <pre class="listing">
+&lt;OfferCurve resource="UNIT_A" day="2030-03-08"&gt;
+  &lt;Point mw="10.0" price="10.00"/&gt;
+  &lt;Point mw="20.0" price="20.00"/&gt;
+&lt;/OfferCurve&gt;</pre>
+            </section>
+            <p class="note bad">Messages, names and XML on this tab are invented for the demo.</p>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <footer class="statusbar">
+      <span class="statusbar-code ok">OK</span>
+      <span>Query returned 5 rows (made-up data).</span>
+      <span class="spacer"></span>
+      <span class="statusbar-stamp">2030-03-08 09:41:07 CT</span>
+    </footer>
+  </body>
+</html>

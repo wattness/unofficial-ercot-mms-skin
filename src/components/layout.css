@@ -1,0 +1,37 @@
+[data-skin="mms"] .layout {
+  display: flex;
+  align-items: stretch;
+}
+
+[data-skin="mms"] .layout-main {
+  flex: 1;
+  min-width: 0;
+}
+
+[data-skin="mms"] .content {
+  min-height: calc(100vh - 96px);
+  padding: 0 0 26px;
+  background: var(--mms-bg);
+}
+
+[data-skin="mms"] .prose {
+  padding: 8px 10px 14px;
+}
+
+[data-skin="mms"] .prose h2 {
+  margin: 0 0 6px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+[data-skin="mms"] .prose h3 {
+  margin: 14px 0 4px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+[data-skin="mms"] .prose p {
+  max-width: 110ch;
+  margin: 0 0 8px;
+  line-height: 1.55;
+}

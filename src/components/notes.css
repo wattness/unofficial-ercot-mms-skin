@@ -1,0 +1,78 @@
+[data-skin="mms"] .note {
+  margin: 0;
+  padding: 8px 10px;
+  border-left: 3px solid var(--mms-rule);
+  background: var(--mms-note-bg);
+  color: var(--mms-note-text);
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+[data-skin="mms"] .note b {
+  color: var(--mms-text);
+}
+
+[data-skin="mms"] .note.warn {
+  border-left-color: var(--mms-warn-accent);
+  background: var(--mms-note-warn-bg);
+}
+
+[data-skin="mms"] .note.bad {
+  border-left-color: var(--mms-note-bad-border);
+  background: var(--mms-note-bad-bg);
+}
+
+[data-skin="mms"] ul.note {
+  margin: 0;
+  padding-left: 28px;
+}
+
+/* Inline counterpart of .note, for a remark inside a cell or a line. */
+[data-skin="mms"] .aside {
+  color: var(--mms-text-muted);
+  font-size: 10px;
+}
+
+[data-skin="mms"] .aside b {
+  color: var(--mms-text);
+  font-weight: 700;
+}
+
+[data-skin="mms"] .pill {
+  display: inline-block;
+  padding: 0 5px;
+  border: 1px solid currentcolor;
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+[data-skin="mms"] .pill.ok {
+  color: var(--mms-success);
+}
+
+[data-skin="mms"] .pill.warn {
+  color: var(--mms-warning);
+}
+
+[data-skin="mms"] .pill.bad {
+  color: var(--mms-danger);
+}
+
+[data-skin="mms"] .pill.muted {
+  color: var(--mms-text-muted);
+}
+
+[data-skin="mms"] .badge {
+  display: inline-block;
+  margin-left: 5px;
+  padding: 0 4px;
+  border: 1px solid var(--mms-badge-border);
+  background: var(--mms-badge-bg);
+  color: var(--mms-badge-text);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  vertical-align: 1px;
+}

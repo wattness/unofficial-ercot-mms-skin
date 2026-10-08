@@ -1,0 +1,66 @@
+[data-skin="mms"] .masthead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  padding: 6px 12px 5px;
+  border-bottom: 1px solid var(--mms-rule);
+  background: var(--mms-bg);
+}
+
+[data-skin="mms"] .masthead-title {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+}
+
+/* Environment marker, e.g. TEST or DEMO. */
+[data-skin="mms"] .env-badge {
+  padding: 1px 6px;
+  border-radius: 2px;
+  background: var(--mms-danger);
+  color: var(--mms-on-accent);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+}
+
+[data-skin="mms"] .masthead-user {
+  color: var(--mms-text-muted);
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+[data-skin="mms"] .masthead-user b {
+  color: var(--mms-text);
+  font-weight: 700;
+}
+
+[data-skin="mms"] .masthead-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+}
+
+[data-skin="mms"] .masthead-controls label {
+  color: var(--mms-text-muted);
+  white-space: nowrap;
+}
+
+[data-skin="mms"] select.compact {
+  height: 17px;
+  padding: 0 2px;
+  font-family: var(--mms-font-mono);
+  font-size: 10px;
+}
+
+/* Popups anchored in the masthead sit at the right edge, so they open leftwards. */
+[data-skin="mms"] .masthead .calendar,
+[data-skin="mms"] .masthead .popover {
+  right: 0;
+  left: auto;
+}

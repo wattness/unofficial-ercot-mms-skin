@@ -1,0 +1,28 @@
+unofficial-ercot-mms-skin
+Copyright 2026 Wattness
+
+This project is an independent, unofficial recreation of the visual style of
+the Market Management System (MMS) screens operated by the Electric
+Reliability Council of Texas, Inc. (ERCOT). It is not ERCOT software and is
+not affiliated with, endorsed by or sponsored by ERCOT. The name "ERCOT" is
+used only to describe what the style recreates; ERCOT's names and marks belong
+to ERCOT.
+
+Third-party material
+
+None is included. The repository contains no ERCOT images, logos, documents,
+schemas, code or fonts. Ten values in src/tokens.css were measured from a
+screenshot in a public ERCOT presentation:
+
+  ERCOT-TWG-2026-08-20-NPRR-1188-System-Impacts.pptx, ppt/media/image11.png
+  https://www.ercot.com/files/docs/2026/08/20/ERCOT-TWG-2026-08-20-NPRR-1188-System-Impacts.pptx
+
+scripts/verify-provenance.mjs downloads that file when run, to check the
+values, and does not store or redistribute it.
+
+Fonts
+
+No font files are bundled. The stylesheet names fonts installed with common
+operating systems (Verdana, Tahoma, Geneva, Georgia, Menlo, Consolas) and
+generic CSS families (ui-monospace, monospace, sans-serif, serif). Fonts are
+loaded from the user's system under their owners' licences.

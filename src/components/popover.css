@@ -1,0 +1,73 @@
+/* A term with an info mark; its .popover shows on hover or keyboard focus. */
+[data-skin="mms"] .info {
+  position: relative;
+  white-space: nowrap;
+}
+
+[data-skin="mms"] .info:focus {
+  outline: 2px solid var(--mms-accent);
+  outline-offset: 1px;
+}
+
+[data-skin="mms"] .info-mark {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  margin-left: 4px;
+  border-radius: 50%;
+  background: var(--mms-text-muted);
+  color: var(--mms-surface);
+  font-family: georgia, serif;
+  font-size: 9px;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 11px;
+  text-align: center;
+  vertical-align: 1px;
+  cursor: help;
+}
+
+[data-skin="mms"] .info:hover .info-mark,
+[data-skin="mms"] .info:focus-within .info-mark {
+  background: var(--mms-accent);
+}
+
+[data-skin="mms"] .popover {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 20;
+  display: none;
+  width: 340px;
+  margin-top: 4px;
+  padding: 6px 8px;
+  border: 1px solid var(--mms-rule);
+  background: var(--mms-surface);
+  box-shadow: 2px 2px 0 var(--mms-shadow);
+  color: var(--mms-text);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.45;
+  text-align: left;
+  white-space: normal;
+}
+
+[data-skin="mms"] .info:hover .popover,
+[data-skin="mms"] .info:focus-within .popover {
+  display: block;
+}
+
+[data-skin="mms"] .popover b {
+  color: var(--mms-accent);
+}
+
+[data-skin="mms"] .popover i {
+  color: var(--mms-text-muted);
+}
+
+/* Near the right edge, open leftwards instead of off-screen. */
+[data-skin="mms"] td:last-child .popover,
+[data-skin="mms"] th:last-child .popover {
+  right: 0;
+  left: auto;
+}

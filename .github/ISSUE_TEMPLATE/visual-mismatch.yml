@@ -1,0 +1,31 @@
+name: Visual mismatch
+description: Something in the skin does not match the market-system screens it recreates.
+labels: [visual]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        Evidence must be public: an ERCOT document, presentation or web page anyone can open.
+        Do not attach screenshots of a live or test market system; they can show confidential
+        market data.
+  - type: input
+    id: component
+    attributes:
+      label: Component
+      description: The class or component that differs, e.g. .tab, .grid, .section-header.
+    validations:
+      required: true
+  - type: textarea
+    id: difference
+    attributes:
+      label: What differs
+      description: Colour, size, spacing or shape, with the value you expect.
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Public source
+      description: URL of the public document, plus page or slide number.
+    validations:
+      required: true

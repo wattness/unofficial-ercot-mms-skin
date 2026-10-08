@@ -1,0 +1,59 @@
+{
+  "name": "unofficial-ercot-mms-skin",
+  "version": "0.1.0",
+  "description": "Unofficial CSS recreation of the ERCOT MMS market-screen look: tokens and components for dense market UIs. Not affiliated with or endorsed by ERCOT.",
+  "keywords": [
+    "ercot",
+    "mms",
+    "css",
+    "design-tokens",
+    "market",
+    "energy",
+    "data-grid"
+  ],
+  "author": "Wattness",
+  "homepage": "https://github.com/wattness/unofficial-ercot-mms-skin#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wattness/unofficial-ercot-mms-skin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wattness/unofficial-ercot-mms-skin/issues"
+  },
+  "type": "module",
+  "files": [
+    "dist",
+    "src",
+    "NOTICE"
+  ],
+  "exports": {
+    ".": "./dist/mms-skin.css",
+    "./tokens.json": "./dist/tokens.json",
+    "./src/*": "./src/*"
+  },
+  "style": "dist/mms-skin.css",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "prepare": "node scripts/build.mjs",
+    "test": "node --test",
+    "lint": "prettier --check . && stylelint \"src/**/*.css\" && eslint .",
+    "format": "prettier --write . && stylelint --fix \"src/**/*.css\" && eslint --fix .",
+    "verify-provenance": "node scripts/verify-provenance.mjs"
+  },
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": ">=22",
+      "onFail": "error"
+    }
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "eslint": "10.12.0",
+    "globals": "17.13.0",
+    "prettier": "3.9.9",
+    "stylelint": "17.16.0",
+    "stylelint-config-standard": "40.0.0"
+  },
+  "license": "MIT"
+}

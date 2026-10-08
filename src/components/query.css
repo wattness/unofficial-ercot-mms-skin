@@ -1,0 +1,32 @@
+[data-skin="mms"] .query {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px 14px;
+  padding: 9px 10px;
+  background: var(--mms-panel);
+}
+
+[data-skin="mms"] .query-field {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+[data-skin="mms"] .query label {
+  white-space: nowrap;
+}
+
+[data-skin="mms"] .actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 10px;
+  background: var(--mms-band);
+}
+
+[data-skin="mms"] .actions-hint {
+  color: var(--mms-text-secondary);
+  font-size: 10px;
+}
