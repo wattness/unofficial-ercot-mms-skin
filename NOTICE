@@ -10,9 +10,29 @@ to ERCOT.
 
 Third-party material
 
-None is included. The repository contains no ERCOT images, logos, documents,
-schemas, code or fonts. Ten values in src/tokens.css were measured from a
-screenshot in a public ERCOT presentation:
+docs/ercot/ holds excerpts from documents ERCOT published on www.ercot.com,
+and the text of ERCOT's Website User Agreement. They are ERCOT's and are not
+covered by this project's MIT licence. They are not part of the npm package.
+
+  - One image is a file ERCOT published inside its presentation
+    ERCOT-TWG-2026-08-20-NPRR-1188-System-Impacts.pptx (ppt/media/image11.png),
+    kept byte for byte, with ERCOT's Website User Agreement beside it in
+    docs/ercot/ERCOT-TERMS-OF-USE.txt.
+  - Eight images are crops of screenshots and of rendered pages from ERCOT's
+    2007 documents on the design of these screens. Each is credited to its
+    source where it is shown. They compare the skin with ERCOT's published
+    designs and record how those designs were reviewed. Section 5 of the
+    Agreement covers unmodified contents only; it does not cover these
+    crops, and no permission from ERCOT is claimed for them.
+
+docs/sources.md lists each file with its source document, URL and SHA-256, how
+it was made, and how it relates to the Agreement. None shows an ERCOT logo.
+Apart from the Agreement's text, no whole ERCOT document is included, and no
+ERCOT logo, schema, code or font. docs/provenance.md and docs/sources.md also
+quote short passages from ERCOT documents and web pages, each credited to its
+source.
+
+Ten values in src/tokens.css were measured from the first image:
 
   ERCOT-TWG-2026-08-20-NPRR-1188-System-Impacts.pptx, ppt/media/image11.png
   https://www.ercot.com/files/docs/2026/08/20/ERCOT-TWG-2026-08-20-NPRR-1188-System-Impacts.pptx

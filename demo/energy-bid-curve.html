@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en" data-skin="mms">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Energy Bid Curve (MMS skin demo, made-up data)</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="../dist/mms-skin.css" />
+  </head>
+  <body>
+    <!-- Static redraw of the screen in the README's source screenshot, on made-up data; the controls are inert. -->
+    <main>
+      <div class="tabstrip" role="tablist" aria-label="Screens">
+        <button class="tab" type="button" role="tab" aria-selected="false"><span>Current Operating Plan</span></button>
+        <button class="tab" type="button" role="tab" aria-selected="false"><span>Three-Part Offer</span></button>
+        <button class="tab" type="button" role="tab" aria-selected="false"><span>Output Schedule</span></button>
+        <button class="tab" type="button" role="tab" aria-selected="false"><span>Ancillary Service Offer</span></button>
+        <button class="tab" type="button" role="tab" aria-selected="false"><span>Availability Plan</span></button>
+        <button
+          class="tab"
+          type="button"
+          role="tab"
+          id="tab-bid-curve"
+          aria-controls="panel-bid-curve"
+          aria-selected="true"
+        >
+          <span>Energy Bid Curve</span>
+        </button>
+        <button class="tab" type="button" role="tab" aria-selected="false"><span>Exceptional Fuel Cost</span></button>
+      </div>
+      <div class="tabstrip-rule"></div>
+
+      <div class="content">
+        <p class="note warn">
+          <b>Demo data.</b> The resource names and the operating day are made up. This is an unofficial recreation, not
+          ERCOT software, and is not affiliated with or endorsed by ERCOT. The layout follows the Energy Bid Curve
+          screen in a public ERCOT presentation.
+        </p>
+
+        <div id="panel-bid-curve" role="tabpanel" aria-labelledby="tab-bid-curve">
+          <section class="section">
+            <button class="section-header" type="button" aria-expanded="true" aria-controls="query-body">
+              <span class="section-caret" aria-hidden="true">▼</span>Query Energy Bid Curve
+            </button>
+            <div id="query-body">
+              <div class="query">
+                <span class="query-field">
+                  <label for="operating-day"><b>Operating Day</b></label>
+                  <span class="datepicker">
+                    <input id="operating-day" class="datepicker-field" type="text" value="Mar 08 2030" readonly />
+                    <button class="datepicker-button" type="button" aria-label="Open calendar" aria-expanded="false">
+                      <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
+                        <rect x="0.5" y="1.5" width="11" height="10" fill="none" stroke="currentColor" />
+                        <path d="M0.5 4.5h11M3 0v3M9 0v3" stroke="currentColor" />
+                      </svg>
+                    </button>
+                  </span>
+                </span>
+                <span class="query-field">
+                  <label for="resource-name">Resource Name</label>
+                  <select id="resource-name">
+                    <option>All Resources</option>
+                    <option>DEMO_RES_01</option>
+                    <option>DEMO_RES_02</option>
+                    <option>DEMO_RES_03</option>
+                    <option>DEMO_RES_04</option>
+                    <option>DEMO_RES_05</option>
+                    <option>DEMO_RES_06</option>
+                  </select>
+                </span>
+                <label class="checkbox"><input type="checkbox" checked /> Submitted</label>
+                <label class="checkbox"><input type="checkbox" checked /> Not Submitted</label>
+              </div>
+              <!-- ERCOT's screenshot leaves this band empty; .actions is the skin's band, so it holds the button. -->
+              <div class="actions">
+                <button class="btn primary" type="button">Query</button>
+              </div>
+            </div>
+          </section>
+
+          <section class="section">
+            <div class="grid-title">Energy Bid Curve</div>
+            <div class="grid-scroll">
+              <table class="grid">
+                <thead>
+                  <tr>
+                    <th scope="col">Submitted</th>
+                    <th scope="col">Resource Name</th>
+                    <th scope="col">Combined Cycle</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="selectable" aria-selected="true">
+                    <td></td>
+                    <td>DEMO_RES_01</td>
+                    <td></td>
+                  </tr>
+                  <tr class="selectable" aria-selected="false">
+                    <td></td>
+                    <td>DEMO_RES_02</td>
+                    <td></td>
+                  </tr>
+                  <tr class="selectable" aria-selected="false">
+                    <td></td>
+                    <td>DEMO_RES_03</td>
+                    <td></td>
+                  </tr>
+                  <tr class="selectable" aria-selected="false">
+                    <td></td>
+                    <td>DEMO_RES_04</td>
+                    <td></td>
+                  </tr>
+                  <tr class="selectable" aria-selected="false">
+                    <td></td>
+                    <td>DEMO_RES_05</td>
+                    <td></td>
+                  </tr>
+                  <tr class="selectable" aria-selected="false">
+                    <td></td>
+                    <td>DEMO_RES_06</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

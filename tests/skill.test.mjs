@@ -8,6 +8,7 @@ import { checkHtml, skinClasses } from "../skills/building-mms-screens/scripts/c
 const SKILLS = new URL("../skills/", import.meta.url);
 const SKILL_DIR = fileURLToPath(new URL("building-mms-screens/", SKILLS));
 const read = (path) => readFileSync(new URL(path, import.meta.url), "utf8");
+const DEMO_PAGES = readdirSync(new URL("../demo/", import.meta.url)).filter((f) => f.endsWith(".html"));
 
 test("each skill has valid Agent Skills frontmatter", () => {
   for (const dir of readdirSync(SKILLS)) {
@@ -40,8 +41,9 @@ test("components.md documents every class the skin defines", () => {
   }
 });
 
-test("the checker passes the starter page and the demo, run as SKILL.md says", () => {
-  const out = execFileSync("node", ["scripts/check-screen.mjs", "assets/starter.html", "../../demo/index.html"], {
+test("the checker passes the starter page and every demo page, run as SKILL.md says", () => {
+  const pages = DEMO_PAGES.map((f) => `../../demo/${f}`);
+  const out = execFileSync("node", ["scripts/check-screen.mjs", "assets/starter.html", ...pages], {
     cwd: SKILL_DIR,
     encoding: "utf8",
   });
@@ -88,8 +90,11 @@ test("the checker reports the mistakes it is meant to catch", () => {
   assert.equal(result.status, 1);
 });
 
-test("the demo says its data is made up and that it is unofficial", () => {
-  const demo = read("../demo/index.html");
-  assert.match(demo, /made up/i);
-  assert.match(demo, /not\s+affiliated\s+with\s+or\s+endorsed\s+by\s+ERCOT/);
+test("every demo page says its data is made up and that it is unofficial", () => {
+  assert.ok(DEMO_PAGES.includes("index.html"));
+  for (const page of DEMO_PAGES) {
+    const html = read(`../demo/${page}`);
+    assert.match(html, /made up/i, page);
+    assert.match(html, /not\s+affiliated\s+with\s+or\s+endorsed\s+by\s+ERCOT/, page);
+  }
 });

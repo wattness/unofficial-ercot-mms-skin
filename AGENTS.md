@@ -16,9 +16,14 @@ JavaScript in the package. It is not ERCOT software; keep it that way in code, d
 - `scripts/contrast.mjs`: WCAG contrast for the text/background pairs the components produce, including
   grid-cell text on hovered, selected and flagged rows.
 - `scripts/verify-provenance.mjs`: checks the values marked `sampled` against the source screenshot.
-- `demo/`: a static page on made-up data, plus the script that wires its interactions.
+- `demo/`: static pages on made-up data, plus the script that wires the interactions of `demo/index.html`.
+- `docs/img/`: screenshots of the demo pages and the components, used by the README and `docs/provenance.md`.
+- `docs/ercot/`: the ERCOT excerpts listed in `docs/sources.md`, and ERCOT's Website User Agreement.
+- `docs/sources.md`, `docs/provenance.md`, `docs/prior-art.md`: where each ERCOT excerpt comes from, the 2007
+  record set beside the skin, and the search for similar projects.
 - `skills/building-mms-screens/`: the Agent Skill for people building screens with the skin.
-- `tests/`: `node:test` suites; `tests/fixtures/` holds pages the checker must reject.
+- `tests/`: `node:test` suites; `tests/fixtures/` holds pages the checker must reject. `tests/docs.test.mjs` checks
+  the SHA-256 list in `docs/sources.md` against the files in `docs/ercot/`.
 
 ## Commands
 
@@ -30,11 +35,28 @@ npm run lint     # prettier --check, stylelint and eslint
 npm run format   # fix formatting
 ```
 
-Run `npm run build` after any change under `src/`; a test fails if the skill's copies are stale. After a
-visible change, regenerate `docs/demo.png`: a 1280×800 headless Chrome screenshot of `demo/index.html`.
+Run `npm run build` after any change under `src/`; a test fails if the skill's copies are stale.
+
+## Screenshots
+
+After a visible change, regenerate the images in `docs/img/`. They are headless Chrome screenshots at device scale
+factor 2, saved as lossless PNG; never quantise them, because they show exact token colours.
+
+- `screen-energy-bid-curve.png` is `demo/energy-bid-curve.html` at 1184×445 CSS pixels, the size of ERCOT's
+  screenshot, so the two can be compared at the same scale.
+- `screen-energy-offer-curve.png` is `demo/index.html` at 1280×440, the height at which the page fits without
+  scrolling.
+- `component-*.png` each show one component, built with the markup of `demo/index.html` (after `demo/demo.js` has
+  run) or of `skills/building-mms-screens/references/components.md`, alone on a page that loads only
+  `dist/mms-skin.css`. Each is cut to the component's box, open popups included, with 16px of page around it; a
+  component's own margins add to that. No script in this repository makes them; they were cut with a Playwright
+  script kept outside it. Cut a replacement the same way and check it at full size.
 
 ```sh
-google-chrome --headless --hide-scrollbars --window-size=1280,800 --screenshot=docs/demo.png demo/index.html
+google-chrome --headless --hide-scrollbars --force-device-scale-factor=2 --window-size=1184,445 \
+  --screenshot=docs/img/screen-energy-bid-curve.png demo/energy-bid-curve.html
+google-chrome --headless --hide-scrollbars --force-device-scale-factor=2 --window-size=1280,440 \
+  --screenshot=docs/img/screen-energy-offer-curve.png demo/index.html
 ```
 
 ## Rules
@@ -52,5 +74,9 @@ google-chrome --headless --hide-scrollbars --window-size=1280,800 --screenshot=d
 - Mark a token `sampled` only if `scripts/verify-provenance.mjs` checks it against the screenshot.
 - Demo and examples use invented names and numbers, labelled as made up. Never real market participants,
   resources, settlement points or prices.
-- Do not add ERCOT logos, images, documents or fonts to the repository.
+- ERCOT material goes only in `docs/ercot/`: the excerpts listed in `docs/sources.md` and ERCOT's Website User
+  Agreement. Never an ERCOT logo or font, or any other whole ERCOT document. A new excerpt needs its entry there
+  first: the document's URL and SHA-256, the page or slide, whether the image is unmodified or a crop, the crop box,
+  and the file's SHA-256 in the list under "Excerpt files". Check it at full size: no browser window, logo, contact details,
+  or name of a person, company or resource.
 - Comments explain why, in one line where possible.
